@@ -1,0 +1,15 @@
+
+# انشاء بيئة جديدة 
+conda create -n gaza_env python=3.10
+# تفعيلها 
+conda activate gaza_env
+
+# تشبيت متطلبات التشغيل 
+pip install streamlit pandas scikit-learn matplotlib seaborn openpyxl
+ 
+تشغيل الملف 
+
+ streamlit run gaza_hunger_app.py
+
+
+ملاحظة يجيب الدخول الى امكان تواجد ملف  gaza_hunger_app.py 
