@@ -109,7 +109,7 @@ st.markdown("""
 def load_data():
     """Load and cache the dataset"""
     try:
-        df = pd.read_excel(r'C:\Users\HP\Desktop\test\GazaHungerData.xlsx')
+        df = pd.read_excel('GazaHungerData.xlsx')
         return df
     except Exception as e:
         st.error(f"Error loading data: {e}")
