@@ -1132,7 +1132,7 @@ def main():
     st.markdown("""
     <div style='text-align: center; color: #666; padding: 2rem 0;'>
         <p><strong>Gaza Hunger Prediction System v1.0</strong></p>
-        <p>Developed for humanitarian crisis response | February 2026</p>
+        <p>Developed for Ahmed Osrf | February 2026</p>
         <p>⚠️ For official use only - Results should be validated by field workers</p>
     </div>
     """, unsafe_allow_html=True)
