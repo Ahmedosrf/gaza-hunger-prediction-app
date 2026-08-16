@@ -1,198 +1,91 @@
-# Gaza Hunger Prediction System - Streamlit Application
+# Gaza Household Food-Security Prediction
 
-## 📋 Overview
+[![Streamlit](https://img.shields.io/badge/app-Streamlit-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![Python](https://img.shields.io/badge/Python-3.8%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Machine Learning](https://img.shields.io/badge/ML-classification-6E40C9)](#modeling-workflow)
+[![Humanitarian Research](https://img.shields.io/badge/context-humanitarian%20research-0F766E)](#responsible-use)
 
-A professional, interactive Streamlit application for predicting household hunger severity in Gaza using machine learning. This system analyzes socioeconomic indicators, displacement patterns, and food security metrics to assess household vulnerability.
+> A local Streamlit research application for exploring household food-security data and comparing classification models for the `Q50` target variable.
 
-## ✨ Features
+## Project Overview
 
-### 1. **Data Overview** 📊
-- Interactive dataset exploration
-- Statistical summaries (numerical & categorical)
-- Target variable distribution visualization
-- Missing values analysis
-- Feature descriptions
+This project provides an interactive workflow for loading a household survey dataset, inspecting data quality, preprocessing mixed features, training baseline classifiers, evaluating results, and testing a single-household prediction. The interface is designed for exploratory analysis and humanitarian research support; it is not a validated hunger assessment or an operational decision system.
 
-### 2. **Data Preprocessing** 🔧
-- Automatic label encoding for categorical variables
-- Feature scaling with StandardScaler
-- Configurable train-test split
-- Real-time preprocessing status
+The application compares Logistic Regression, Random Forest, and Gradient Boosting models. It exposes accuracy, precision, recall, F1-score, confusion matrices, classification reports, feature importance, and downloadable prediction outputs.
 
-### 3. **Model Training** 🤖
-- Three machine learning algorithms:
-  - Logistic Regression
-  - Random Forest
-  - Gradient Boosting
-- Automated model comparison
-- Performance metrics visualization
+## What the App Includes
 
-### 4. **Model Performance** 📈
-- Detailed accuracy metrics (Accuracy, Precision, Recall, F1-Score)
-- Interactive confusion matrix
-- Classification reports
-- Feature importance analysis (for tree-based models)
-- Downloadable feature importance data
+| Area | Functionality |
+|---|---|
+| Data overview | Dataset shape, columns, missing values, distributions, and feature descriptions. |
+| Preprocessing | Encoding of categorical values, feature preparation, and train/test splitting. |
+| Model training | Comparison of Logistic Regression, Random Forest, and Gradient Boosting. |
+| Evaluation | Accuracy, precision, recall, F1-score, confusion matrix, and classification report. |
+| Interpretation | Tree-based feature importance and downloadable importance tables. |
+| Prediction | A form for entering household attributes and viewing class probabilities. |
+| Export | Processed data, predictions, reports, and serialized models where supported by the app. |
 
-### 5. **Make Predictions** 🎯
-- User-friendly input form for household data
-- Real-time prediction with probability scores
-- Risk level classification (High/Moderate/Low)
-- Color-coded results with visual indicators
-- Actionable recommendations based on prediction
+## Modeling Workflow
 
-### 6. **Export Results** 📥
-- Download processed datasets (CSV)
-- Export model predictions with actual vs predicted labels
-- Generate comprehensive performance reports (TXT)
-- Export trained models (.pkl) for deployment
-
-## 🚀 Installation & Setup
-
-### Prerequisites
-- Python 3.8 or higher
-- pip package manager
-
-### Step 1: Install Dependencies
-```bash
-pip install -r requirements.txt
+```text
+GazaHungerData.xlsx
+        ↓
+Data quality review and preprocessing
+        ↓
+Categorical encoding + train/test split
+        ↓
+Logistic Regression | Random Forest | Gradient Boosting
+        ↓
+Metrics + confusion matrix + feature importance
+        ↓
+Exploratory household-level prediction
 ```
 
-### Step 2: Run the Application
+The current target is the survey field **`Q50`**, described in the application as a proxy for food-security or hunger severity. The target definition, label encoding, class balance, and survey design should be reviewed before interpreting any model output.
+
+## Dataset
+
+The included workbook is expected at:
+
+```text
+GazaHungerData.xlsx
+```
+
+The application works with approximately 1,209 household records and a broad set of survey variables covering family composition, economic conditions, displacement or living conditions, and food-access indicators. Treat these counts as dataset-specific and recompute them whenever the workbook changes.
+
+## Run Locally
+
 ```bash
+git clone https://github.com/Ahmedosrf/gaza-hunger-prediction-app.git
+cd gaza-hunger-prediction-app
+python -m venv .venv
+source .venv/bin/activate        # Windows: .venv\\Scripts\\activate
+pip install -r requirements.txt
 streamlit run gaza_hunger_app.py
 ```
 
-The application will automatically open in your default web browser at `http://localhost:8501`
+The app should open at `http://localhost:8501`. Upload or place `GazaHungerData.xlsx` where the application expects it, then follow the tabs from data overview to preprocessing, training, evaluation, and prediction.
 
-## 📊 Dataset Information
+## Repository Structure
 
-- **Total Households**: 1,209
-- **Data Collection Period**: May-July 2024
-- **Location**: Gaza Strip
-- **Features**: 50 variables including:
-  - Family composition (size, children, elderly, etc.)
-  - Economic indicators (income, employment, etc.)
-  - Living conditions (shelter type, displacement, etc.)
-  - Food security metrics (meal frequency, food access, etc.)
-- **Target Variable**: Water Availability (Q50) - proxy for hunger severity
-
-## 🎯 How to Use
-
-### Basic Workflow:
-
-1. **Start Here - Data Overview Tab**
-   - Review dataset statistics and distributions
-   - Understand feature descriptions
-   - Check for data quality issues
-
-2. **Preprocess the Data**
-   - Click "Start Preprocessing" button
-   - Review encoded variables and scaled features
-   - Verify train-test split
-
-3. **Train Models**
-   - Click "Train All Models" button
-   - Compare performance metrics
-   - Identify the best performing model
-
-4. **Analyze Performance**
-   - Select a model for detailed analysis
-   - Review confusion matrix and classification report
-   - Examine feature importance (if applicable)
-
-5. **Make Predictions**
-   - Fill in household information form
-   - Click "Predict Hunger Severity"
-   - Review risk assessment and recommendations
-
-6. **Export Your Results**
-   - Download processed data for analysis
-   - Export predictions for reporting
-   - Save trained models for deployment
-
-## 🎨 User Interface Features
-
-### Sidebar Controls:
-- **Model Selection**: Choose between Logistic Regression, Random Forest, or Gradient Boosting
-- **Test Set Size**: Adjust the percentage of data used for testing (10-40%)
-
-### Visual Elements:
-- **Interactive Charts**: Plotly-based visualizations for exploration
-- **Color-Coded Predictions**: 
-  - 🔴 Red = High Risk
-  - 🟠 Orange = Moderate Risk
-  - 🟢 Green = Low Risk
-- **Metrics Cards**: Quick access to key statistics
-- **Progress Indicators**: Real-time feedback during processing
-
-## 📁 File Structure
-
-```
-├── gaza_hunger_app.py          # Main Streamlit application
-├── requirements.txt             # Python dependencies
-├── GazaHungerData.xlsx         # Dataset (required)
-└── README.md                   # This file
+```text
+.
+├── gaza_hunger_app.py       # Streamlit application
+├── requirements.txt         # Python dependencies
+├── GazaHungerData.xlsx      # Survey workbook, if distributed with the project
+└── README.md
 ```
 
-## 🔧 Configuration
+## Responsible Use
 
-### Model Parameters (editable in code):
+This project uses sensitive humanitarian context and should be handled with care. Do not commit identifiable household records, phone numbers, exact addresses, or other private attributes. Predictions should not determine aid eligibility, deny services, or replace field verification. Any external deployment requires consent, documented governance, bias and subgroup evaluation, monitoring for dataset shift, and review by qualified humanitarian practitioners.
 
-**Logistic Regression:**
-- `max_iter`: 1000
-- `random_state`: 42
-- `class_weight`: 'balanced'
+The current implementation is best described as a **research prototype**. Report the data collection process, label definition, class distribution, train/test protocol, confidence intervals, and failure cases before presenting results as evidence.
 
-**Random Forest:**
-- `n_estimators`: 100
-- `max_depth`: 10
-- `class_weight`: 'balanced'
+## Limitations and Next Steps
 
-**Gradient Boosting:**
-- `n_estimators`: 100
-- `max_depth`: 5
-- `learning_rate`: 0.1
+A single random train/test split can overstate performance, especially when households are correlated or the dataset is small. Future work should add stratified cross-validation, explicit leakage checks, calibrated probabilities, subgroup metrics, a versioned data dictionary, reproducible experiment configuration, and automated tests for preprocessing. The target should also be reviewed with domain experts rather than described as hunger severity without qualification.
 
-## 📈 Expected Performance
+## Maintainer
 
-Performance ranges (will vary based on train-test split):
-- **Accuracy**: 0.75 - 0.85
-- **Precision**: 0.72 - 0.82
-- **Recall**: 0.70 - 0.80
-- **F1-Score**: 0.71 - 0.81
-
-*Note: Random Forest typically performs best on this dataset*
-
-## 🛠️ Troubleshooting
-
-### Common Issues:
-
-1. **"Module not found" error**
-   - Solution: Run `pip install -r requirements.txt`
-
-2. **"Failed to load data" error**
-   - Solution: Ensure `GazaHungerData.xlsx` is accessible
-
-3. **Slow performance**
-   - Solution: Reduce the number of features or use a smaller dataset
-
-## 🔐 Security & Privacy
-
-- This application is designed for **humanitarian use only**
-- All data should be handled according to relevant privacy regulations
-- Predictions should be validated by field workers
-- No data is stored or transmitted outside the local session
-
-## 📞 Support
-
-For issues or questions:
-1. Check the troubleshooting section
-2. Review the code comments for implementation details
-3. Refer to the original Jupyter notebook for algorithm explanations
-
----
-
-**Version**: 1.0  
-**Last Updated**: February 2026  
-**Status**: Production Ready ✅
+[Ahmed Osrof](https://github.com/Ahmedosrf)
